@@ -1,0 +1,89 @@
+'''You're planning a vacation, and you need to decide which city you want to visit. You have shortlisted four cities and identified the return flight cost, daily hotel cost, and weekly car rental cost. While renting a car, you need to pay for entire weeks, even if you return the car sooner.
+
+City	Return Flight ($)	Hotel per day ($)	Weekly Car Rental ($)
+Paris	200	20	200
+London	250	30	120
+Dubai	370	15	80
+Mumbai	450	10	70
+Delhi   475  9   65
+Answer the following questions using the data above:
+
+If you're planning a 1-week long trip, which city should you visit to spend the least amount of money?
+How does the answer to the previous question change if you change the trip's duration to four days, ten days or two weeks?
+If your total budget for the trip is $1000, which city should you visit to maximize the duration of your trip? Which city should you visit if you want to minimize the duration?
+How does the answer to the previous question change if your budget is $600?'''
+
+import math
+def vacation_cost(flight_cost,hotel_cost,weekly_car_rental_cost,no_of_days):
+    total_hotel_cost=hotel_cost*no_of_days
+    weeks=math.ceil(no_of_days/7)
+    total_car_cost=weekly_car_rental_cost*weeks
+    total_cost=total_car_cost+flight_cost+total_hotel_cost
+    result={
+        'duration':no_of_days,
+        'hotel cost':total_hotel_cost,
+        'car cost':total_car_cost,
+        'total vacation cost':total_cost
+    }
+    return result
+paris_1_week=vacation_cost(200,20,200,7)
+london_1_week=vacation_cost(250,30,120,7)
+dubai_1_week=vacation_cost(370,15,80,7)
+mumbai_1_week=vacation_cost(450,10,70,7)
+delhi_1_week=vacation_cost(475,9,65,7)
+print('the cost of 1 week vacation in paris is {}'.format(paris_1_week))
+print('the cost of 1 week vacation in london is {}'.format(london_1_week))
+print('the cost of 1 week vacation in dubai is {}'.format(dubai_1_week))
+print('the cost of 1 week vacation in mumbai is {}'.format(mumbai_1_week))
+print('the cost of 1 week vacation in delhi is {}'.format(delhi_1_week))
+paris_4_days=vacation_cost(200,20,200,4)
+london_4_days=vacation_cost(250,30,120,4)
+dubai_4_days=vacation_cost(370,15,80,4)
+mumbai_4_days=vacation_cost(450,10,70,4)
+delhi_4_days=vacation_cost(475,9,65,4)
+print('the cost of 4 days vacation in paris is {}'.format(paris_4_days))
+print('the cost of 4 days vacation in london is {}'.format(london_4_days))
+print('the cost of 4 days vacation in dubai is {}'.format(dubai_4_days))
+print('the cost of 4 days vacation in mumbai is {}'.format(mumbai_4_days))
+print('the cost of 4 days vacation in delhi is {}'.format(delhi_4_days))
+paris_10_days=vacation_cost(200,20,200,10)
+london_10_days=vacation_cost(250,30,120,10)
+dubai_10_days=vacation_cost(370,15,80,10)
+mumbai_10_days=vacation_cost(450,10,70,10)
+delhi_10_days=vacation_cost(475,9,65,10)
+print('the cost of 10 days vacation in paris is {}'.format(paris_10_days))
+print('the cost of 10 days vacation in london is {}'.format(london_10_days))
+print('the cost of 10 days vacation in dubai is {}'.format(dubai_10_days))
+print('the cost of 10 days vacation in mumbai is {}'.format(mumbai_10_days))
+print('the cost of 10 days vacation in delhi is {}'.format(delhi_10_days))
+paris_14_days=vacation_cost(200,20,200,14)
+london_14_days=vacation_cost(250,30,120,14)
+dubai_14_days=vacation_cost(370,15,80,14)
+mumbai_14_days=vacation_cost(450,10,70,14)
+delhi_14_days=vacation_cost(475,9,65,14)
+print('the cost of 14 days vacation in paris is {}'.format(paris_14_days))
+print('the cost of 14 days vacation in london is {}'.format(london_14_days))
+print('the cost of 14 days vacation in dubai is {}'.format(dubai_14_days))
+print('the cost of 14 days vacation in mumbai is {}'.format(mumbai_14_days))
+print('the cost of 14 days vacation in delhi is {}'.format(delhi_14_days))
+def no_of_days_1000(city,flight_cost,hotel_cost,weekly_car_rental_cost,budget):
+    i=1
+    while(i!=0):
+        total_hotel_cost = hotel_cost * i
+        weeks = math.ceil(i/7)
+        total_car_cost = weekly_car_rental_cost * weeks
+        total_cost = total_car_cost + flight_cost + total_hotel_cost
+        if(total_cost>=budget):
+            break
+        i+=1
+    return  i,city
+duration_1000=[no_of_days_1000('paris',200,20,200,1000),no_of_days_1000('london',250,30,120,1000),no_of_days_1000('dubai',370,15,80,1000),
+          no_of_days_1000('mumbai',450,10,70,1000),no_of_days_1000('delhi',475,9,65,1000)]
+duration_1000.sort()
+print('Minimum no of days for $1000',duration_1000[0])
+print('Maximum no of days for $1000',duration_1000[len(duration_1000)-1])
+duration_600=[no_of_days_1000('paris',200,20,200,600),no_of_days_1000('london',250,30,120,600),no_of_days_1000('dubai',370,15,80,600),
+          no_of_days_1000('mumbai',450,10,70,600),no_of_days_1000('delhi',475,9,65,600)]
+duration_600.sort()
+print('Minimum no of days for $600',duration_600[0])
+print('Maximum no of days for $600',duration_600[len(duration_600)-1])
